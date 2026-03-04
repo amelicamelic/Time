@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>皇上万福金安</title>
+<title>吾皇万岁万岁万万岁</title>
 <style>
 body{
     background:#fff;
@@ -69,13 +69,45 @@ h1{
     backdrop-filter: blur(11.5px); /* 模糊50% */
 }
 #loginScreen input{
-    padding:10px; font-size:16px; margin-top:10px;
+    padding:12px 14px;
+    font-size:16px;
+    margin-top:10px;
+    border:1px solid #eee;
+    outline:none;
+    border-radius:25px;
+    background:#ffffff55;
+    text-align:center;   
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    transition:all 0.2s ease;
+}
+
+#loginScreen input:focus{
+    box-shadow:0 0 0 2px #8b000000;
+    background:#ffffff90;
 }
 #loginScreen button{
-    padding:10px 20px; font-size:16px; margin-top:10px;
+    width:60px;               /* 宽高相同才能是正圆 */
+    height:60px;
+    border:none;
+    border-radius:50%;        /* 关键：圆形 */
+    font-size:14px;
+    margin-top:15px;
+    cursor:pointer;
+    background:#ffffff55;
+    color:#ccc;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:all 0.2s ease;
 }
-#loginMsg{
-    color:red; margin-top:10px;
+
+#loginScreen button:hover{
+    transform:scale(1.05);
+    box-shadow:0 6px 14px rgba(0,0,0,0.2);
+}
+
+#loginScreen button:active{
+    transform:scale(0.95);
+}
+#loginMsg{ color:red; margin-top:10px; 
 }
 </style>
 </head>
