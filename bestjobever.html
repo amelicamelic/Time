@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+<link rel="icon" href="https://github.com/amelicamelic/Time/blob/main/upload-c31919c1-a8ea-4e9d-90de-d9faed9bc900.png?raw=true">  
 <meta charset="UTF-8">
-<title>吾皇万岁万岁万万岁</title>
+<title>Zzz..</title>
 <style>
+@font-face {
+    font-family: 'SFPro';
+    src: url('https://raw.githubusercontent.com/amelicamelic/Time/main/SF-Pro-Text-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body{
     background:#fff;
     color:#000000;
     text-align:center;
     padding-top:0px;
     margin:0;
-    font-family: sans-serif;
+     font-family: 'SFPro', sans-serif;
 }
+
 h1{
     font-size:40px;
     margin-bottom:5px;
@@ -95,20 +104,63 @@ h1{
     cursor:pointer;
     background:#ffffff90;
     color:#ccc;
+    background-image:url("https://i.imgur.com/9juvnns.png");
+    background-size:20px;          /* 等比例縮放 */
+    background-position:center;       /* 置中 */
+    background-repeat:no-repeat;       /* 不重複 */
     box-shadow:0 4px 10px rgba(0,0,0,0.15);
     transition:all 0.2s ease;
 }
 
 #loginScreen button:hover{
     transform:scale(1.05);
-    backfround: #ffffffaa
+    background: #ffffffaa;
+    background-image:url("https://i.imgur.com/HL2DFp2.png");
+    background-size:20px;          /* 等比例縮放 */
+    background-position:center;       /* 置中 */
+    background-repeat:no-repeat;       /* 不重複 */
     box-shadow:0 6px 14px rgba(0,0,0,0.2);
 }
 
 #loginScreen button:active{
     transform:scale(0.95);
 }
-#loginMsg{ color:red; margin-top:10px; 
+#loginMsg{ color:#8b0000; margin-top:10px; 
+}
+
+#manualLock{
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    background-image:url("https://i.imgur.com/tqeBBRg.png");
+    background-size:20px;          /* 等比例縮放 */
+    background-position:center;       /* 置中 */
+    background-repeat:no-repeat;       /* 不重複 */
+    background-color: transparent;
+    backdrop-filter: blur(6px);
+
+
+    transition: all 0.2s ease;
+    z-index: 10000;
+}
+
+#manualLock:hover{
+    transform: scale(1.1);
+    background-image:url("https://i.imgur.com/1TwiCN0.png");
+    background-size:20px;          /* 等比例縮放 */
+    background-position:center;       /* 置中 */
+    background-repeat:no-repeat;       /* 不重複 */
+    background-color: transparent;
+}
+
+#manualLock:active{
+    transform: scale(0.95);
 }
 </style>
 </head>
@@ -116,13 +168,13 @@ h1{
 
 <!-- 登录遮罩 -->
 <div id="loginScreen">
-    <h2>请输入密码解锁</h2>
-    <input type="password" id="passwordInput" placeholder="密码">
-    <button onclick="checkPassword()">解锁</button>
+    <h2>𓋴𓏏𓎛 𓇋𓈖𓊪𓅱</h2>
+    <input type="password" id="passwordInput" placeholder="𓃩𓃢">
+    <button onclick="checkPassword()"></button>
     <div id="loginMsg"></div>
 </div>
-
-<h1>皇上万福金安</h1>
+<button id="manualLock" onclick="lockScreen()"></button>
+<h1>♔</h1>
 <div class="nowTime" id="nowTime"></div>
 
 <div class="money" id="money">¥0</div>
@@ -239,7 +291,7 @@ function update(){
         `本月共计 ${totalDays} 天 ｜ 假日 ${weekendDays} 天 ｜ 上班 ${workDays} 天`;
 
     document.getElementById("money").innerHTML =
-        "¥" + calculateEarned().toFixed(2);
+        "⚝" + calculateEarned().toFixed(2);
 
     if(isWorkingTime(now)){
         document.getElementById("todayStatus").innerHTML =
@@ -253,7 +305,7 @@ function update(){
         const s = Math.floor((diff%60000)/1000);
 
         document.getElementById("countdown").innerHTML =
-            ` ⚘ ${h}小时 ${m}分 ${s}秒`;
+            ` 𓋹 ${h}小时 ${m}分 ${s}秒 `;
 
     }else{
         document.getElementById("todayStatus").innerHTML =
@@ -272,26 +324,28 @@ setInterval(update,1000);
 update();
 
 // ------------------- 密码锁屏逻辑 -------------------
-const PASSWORD = "woxiangxiaban"; // 设置密码
+const PASSWORD = "1"; // 设置密码
 let idleTimer;
 
 function checkPassword(){
     const input = document.getElementById("passwordInput").value;
     if(input === PASSWORD){
         document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("manualLock").style.display = "block";
         resetIdleTimer();
     }else{
-        document.getElementById("loginMsg").innerText = "密码错误，请重试！";
+        document.getElementById("loginMsg").innerText = "𓂧𓏏 𓈖𓆑 𓅱𓂋";
     }
 }
 
 function resetIdleTimer(){
     if(idleTimer) clearTimeout(idleTimer);
-    idleTimer = setTimeout(lockScreen, 1 * 60 * 1000); // 15分钟无操作锁屏
+    idleTimer = setTimeout(lockScreen, 0.5 * 60 * 1000); // 15分钟无操作锁屏
 }
 
 function lockScreen(){
     document.getElementById("loginScreen").style.display = "flex";
+        document.getElementById("manualLock").style.display = "none";
     document.getElementById("passwordInput").value = "";
     document.getElementById("loginMsg").innerText = "";
 }
