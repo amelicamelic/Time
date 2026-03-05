@@ -397,14 +397,14 @@ function update(){
     const remainingMs = totalMs - workedMs;
 
     document.getElementById("progress").innerHTML =
-        `已上班: ${formatMs(workedMs)} ｜ 还剩: ${formatMs(remainingMs)}`;
+        `已上 ${formatMs(workedMs)} ｜ 剩 ${formatMs(remainingMs)}`;
 }
 
 setInterval(update,1000);
 update();
 
 // ------------------- 密码锁屏逻辑 -------------------
-const PASSWORD = "1"; // 设置密码
+const PASSWORD = "30678"; // 设置密码
 let idleTimer;
 let pinMode = false;
 
