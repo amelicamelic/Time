@@ -3,6 +3,7 @@
 <head>
 <link rel="icon" href="https://github.com/amelicamelic/Time/blob/main/upload-c31919c1-a8ea-4e9d-90de-d9faed9bc900.png?raw=true">  
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zzz..</title>
 <style>
 @font-face {
@@ -18,6 +19,7 @@ body{
     text-align:center;
     padding-top:0px;
     margin:0;
+        overflow: hidden;
      font-family: 'SFPro', sans-serif;
 }
 
@@ -144,8 +146,6 @@ h1{
     background-repeat:no-repeat;       /* 不重複 */
     background-color: transparent;
     backdrop-filter: blur(6px);
-
-
     transition: all 0.2s ease;
     z-index: 10000;
 }
@@ -162,6 +162,79 @@ h1{
 #manualLock:active{
     transform: scale(0.95);
 }
+
+#pinLock{
+    position: fixed;
+    top: 15px;
+    right: 70px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image:url("https://i.imgur.com/tqeBBRg.png");
+    background-size:20px;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color: transparent;
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+    z-index: 10000;
+    display: none;
+}
+
+#pinLock:hover{
+    background-image:url("https://i.imgur.com/01aTJHp.png");
+    transform: scale(1.1);
+}
+
+#pinLock.active{
+    background-image:url("https://i.imgur.com/01aTJHp.png");
+}
+
+#centerBox{
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+        min-width:420px;
+        @media (max-width:600px){
+
+#centerBox{
+    min-width:auto;
+    width:95%;
+    top:50%;
+}
+
+h1{
+    font-size:48px;
+}
+
+.money{
+    font-size:64px;
+    margin:30px 0;
+}
+
+.info{
+    font-size:22px;
+}
+
+.countdown{
+    font-size:32px;
+}
+
+.progress{
+    font-size:18px;
+    margin-top:30px;
+}
+
+.nowTime{
+    font-size:16px;
+}
+
+}
+}
 </style>
 </head>
 <body>
@@ -169,11 +242,14 @@ h1{
 <!-- 登录遮罩 -->
 <div id="loginScreen">
     <h2>𓋴𓏏𓎛 𓇋𓈖𓊪𓅱</h2>
-    <input type="password" id="passwordInput" placeholder="𓃩𓃢">
+    <input type="password" id="passwordInput" placeholder="𓃩𓃢" onkeydown="if(event.key==='Enter'){checkPassword()}">
     <button onclick="checkPassword()"></button>
     <div id="loginMsg"></div>
 </div>
+
+<button id="pinLock" onclick="togglePin()"></button>
 <button id="manualLock" onclick="lockScreen()"></button>
+<div id="centerBox">
 <h1>♔</h1>
 <div class="nowTime" id="nowTime"></div>
 
@@ -185,6 +261,7 @@ h1{
 <div class="countdown" id="countdown"></div>
 
 <div class="progress" id="progress"></div>
+</div>
 
 <script>
 // ------------------- 工资计算逻辑 -------------------
@@ -324,14 +401,16 @@ setInterval(update,1000);
 update();
 
 // ------------------- 密码锁屏逻辑 -------------------
-const PASSWORD = "30678"; // 设置密码
+const PASSWORD = "1"; // 设置密码
 let idleTimer;
+let pinMode = false;
 
 function checkPassword(){
     const input = document.getElementById("passwordInput").value;
     if(input === PASSWORD){
         document.getElementById("loginScreen").style.display = "none";
             document.getElementById("manualLock").style.display = "block";
+            document.getElementById("pinLock").style.display = "block";
         resetIdleTimer();
     }else{
         document.getElementById("loginMsg").innerText = "𓂧𓏏 𓈖𓆑 𓅱𓂋";
@@ -339,6 +418,7 @@ function checkPassword(){
 }
 
 function resetIdleTimer(){
+    if(pinMode) return;  // 固定模式不启动自动锁
     if(idleTimer) clearTimeout(idleTimer);
     idleTimer = setTimeout(lockScreen, 0.5 * 60 * 1000); // 15分钟无操作锁屏
 }
@@ -346,6 +426,7 @@ function resetIdleTimer(){
 function lockScreen(){
     document.getElementById("loginScreen").style.display = "flex";
         document.getElementById("manualLock").style.display = "none";
+        document.getElementById("pinLock").style.display = "none";
     document.getElementById("passwordInput").value = "";
     document.getElementById("loginMsg").innerText = "";
 }
@@ -354,6 +435,19 @@ function lockScreen(){
 ["mousemove", "keydown", "click"].forEach(evt => {
     document.addEventListener(evt, resetIdleTimer);
 });
+
+function togglePin(){
+    pinMode = !pinMode;
+    const btn = document.getElementById("pinLock");
+
+    if(pinMode){
+        btn.classList.add("active");
+        if(idleTimer) clearTimeout(idleTimer);
+    }else{
+        btn.classList.remove("active");
+        resetIdleTimer();
+    }
+}
 
 // 页面加载时锁屏
 lockScreen();
