@@ -250,7 +250,7 @@ h1{
     <div id="loginMsg"></div>
 </div>
 
-<button id="pinLock" onclick="togglePin()"></button>
+<button id="pinLock" onclick="togglePin()" ontouchstart="togglePin()"></button>
 <button id="manualLock" onclick="lockScreen()"></button>
 <div id="centerBox">
 <h1>♔</h1>
@@ -441,13 +441,15 @@ function lockScreen(){
 });
 
 function togglePin(){
-    pinMode = !pinMode;
+    
     const btn = document.getElementById("pinLock");
 
     if(pinMode){
+        pinMode = false;
         btn.classList.add("active");
         if(idleTimer) clearTimeout(idleTimer);
     }else{
+        pinMide = ture;
         btn.classList.remove("active");
         resetIdleTimer();
     }
