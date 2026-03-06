@@ -414,6 +414,7 @@ function checkPassword(){
         document.getElementById("loginScreen").style.display = "none";
             document.getElementById("manualLock").style.display = "block";
             document.getElementById("pinLock").style.display = "block";
+            document.getElementById("passwordInput").blur();
         resetIdleTimer();
     }else{
         document.getElementById("loginMsg").innerText = "𓂧𓏏 𓈖𓆑 𓅱𓂋";
