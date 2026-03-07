@@ -153,4 +153,26 @@
 #countdown:empty::after {
     content: "\00a0"; /* 空格字符，保留行高但不顯示文字 */
     opacity: 0;
+
+}
+
+/* 遮罩覆盖 */
+.mask-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(72px + env(safe-area-inset-top));
+  background: var(--bg-main);
+  z-index: 9999;
+}
+
+.mask-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(72px + env(safe-area-inset-bottom));
+  background: var(--bg-main);
+  z-index: 9999;
 }
