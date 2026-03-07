@@ -1,0 +1,156 @@
+:root {
+    --loginScreen-border:#eee;
+    --glass:#ffffff55;
+    --white-glass:#ffffff90;
+    --glass-hover:#ffffffaa;
+    --cc:#ccc;
+    --clock:#8b0000;
+    --text:#666666;
+}
+
+[data-theme="dark"] {
+    --loginScreen-border:#252525dd;       /* 原 #eee -> 深色 */
+    --glass:#00000030;               /* 原 #ffffff55 -> 黑色半透明 */
+    --white-glass:#00000060;         /* 原 #ffffff90 -> 黑色更高透明度 */
+    --glass-hover:#00000090;         /* 原 #ffffffaa -> 黑色几乎不透明 */
+    --cc:#333;                       /* 原 #ccc -> 深灰色 */
+    --clock:#ffdb0d;
+    --text:#fff;
+}
+
+/* 登录遮罩层 */
+#loginScreen{
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    z-index:9999;
+    backdrop-filter: blur(11.5px); /* 模糊50% */
+}
+#loginScreen input{
+    padding:12px 14px;
+    font-size:16px;
+    margin-top:10px;
+    border:1px solid var(--loginScreen-border);
+    outline:none;
+    color: var(--text);
+    border-radius:25px;
+    background: var(--glass);
+    text-align:center;   
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    transition:all 0.2s ease;
+}
+
+#loginScreen input:focus{
+    box-shadow:0 0 0 2px #8b000000;
+    background: var(--white-glass);
+}
+#loginScreen button{
+    width:60px;               /* 宽高相同才能是正圆 */
+    height:60px;
+    border:none;
+    border-radius:50%;        /* 关键：圆形 */
+    font-size:14px;
+    margin-top:15px;
+    cursor:pointer;
+    background: var(--white-glass);
+    color: var(--cc);
+    background-image:url("https://i.imgur.com/9juvnns.png");
+    background-size:20px;          /* 等比例縮放 */
+    background-position:center;       /* 置中 */
+    background-repeat:no-repeat;       /* 不重複 */
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:all 0.2s ease;
+}
+
+#loginScreen button:hover{
+    transform:scale(1.05);
+    background: var(--glass-hover);
+    background-image:url("https://i.imgur.com/HL2DFp2.png");
+    background-size:20px;          /* 等比例縮放 */
+    background-position:center;       /* 置中 */
+    background-repeat:no-repeat;       /* 不重複 */
+    box-shadow:0 6px 14px rgba(0,0,0,0.2);
+}
+
+#loginScreen button:active{
+    transform:scale(0.95);
+}
+#loginMsg{ 
+    color: var(--clock); 
+    margin-top:10px; 
+}
+
+/* 按钮 */
+#manualLock{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: var(--theme-toggle-size);
+    height: var(--theme-toggle-size);
+    padding: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    backdrop-filter: blur(6px);
+    transition: var(--transition-fast);
+    z-index: var(--z-theme);
+}
+
+#manualLock:hover{
+  background: var(--bg-subtle);
+}
+
+#manualLock:active{
+    transform: scale(0.95);
+}
+
+#pinLock{
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: var(--theme-toggle-size);
+    height: var(--theme-toggle-size);
+    padding: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-main);
+    color: var(--text-primary);
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: var(--transition-fast);
+    z-index: var(--z-theme);
+}
+
+#pinLock:hover{
+    background: var(--bg-subtle);
+    transition: all 0.5s ease;
+    color: var(--clock); 
+}
+
+#pinLock.active{
+    color: var(--clock); 
+}
+
+.working{
+    font-weight:bold;
+    color:#8b0000;
+}
+
+.resting{
+    font-weight:bold;
+    color:#69E147;
+}
+
+#countdown:empty {
+    background: none;
+}
+#countdown:empty::after {
+    content: "\00a0"; /* 空格字符，保留行高但不顯示文字 */
+    opacity: 0;
+}

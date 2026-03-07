@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <link rel="icon" href="https://github.com/amelicamelic/Time/blob/main/upload-c31919c1-a8ea-4e9d-90de-d9faed9bc900.png?raw=true" type="image/png">
+    <link rel="stylesheet" href="./RabbitPOINT_files/styles.css">
+    <link rel="stylesheet" href="./RabbitPOINT_files/lock.css">    
+    <link rel="preload" href="https://pbs.twimg.com/media/F6b-7O_bAAAU6Eh?format=jpg&name=large" as="image">
+    <meta name="theme-color" content="#fafafa" id="theme-color-meta">
+
+    <!-- Immediately set theme before page loads -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+        document.getElementById("theme-color-meta").setAttribute("content", theme === "dark" ? "#1a1a1e" : "#fafafa");
+      })();
+    </script>
+
+    <title>Zzz..</title>
+
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="起床上班">
+    <meta property="og:description" content="既然世界上总要有人摆烂，为什么那个人不能是我。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amelicamelic.github.io/Time/RabbitPOINT.html">
+    <meta property="og:image" content="https://pbs.twimg.com/media/Fl294RcaMAARMjc?format=jpg&name=large">
+    <meta property="og:image:alt" content="为什么还不到下班时间:)">
+    <meta property="og:image:width" content="1290">
+    <meta property="og:image:height" content="1290">
+    <meta property="og:site_name" content="Zzz..">
+    <meta property="og:locale" content="zh_CN">
+
+  </head>
+  <body>
+    <!-- 登录遮罩 -->
+    <div id="loginScreen"> 
+        <h2>𓋴𓏏𓎛 𓇋𓈖𓊪𓅱</h2>
+        <input type="password" id="passwordInput" placeholder="𓃩𓃢" onkeydown="if(event.key==='Enter'){checkPassword()}">
+        <button onclick="checkPassword()"></button>
+        <div id="loginMsg"></div>
+    </div>
+    
+    <button class="theme-toggle" aria-label="Toggle dark mode">
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: block;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+      </svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 9.003 0 0012 21a9.003 9.003 9.003 0 008.354-5.646z"></path>
+      </svg>
+    </button>
+    <button id="manualLock" onclick="lockScreen()">
+      <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" style="display:block;">
+        <path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none"/>
+        <rect x="3.5" y="10" width="17" height="12.5" rx="2" ry="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none"/>
+        <path d="M12 14 a1 1 0 1 1 0 2 a1 1 0 1 1 0 -2 M12 17v1.7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="currentColor"/>
+      </svg>
+    </button>
+    <button id="pinLock" onclick="togglePin()"> 
+      <svg class="clock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="12" x2="12" y2="6"/>
+        <line x1="12" y1="12" x2="7.5" y2="15.5"/>
+      </svg>
+    </button>
+
+    <div id="page-wrapper">
+      <header class="header">
+        <div class="container">
+          <div href="" class="logo-link"> <!--原本是a-->
+            <img src="https://pbs.twimg.com/media/F6b-7O_bAAAU6Eh?format=jpg&name=large" width="72" height="72" alt="Mighty Alex Avatar" class="logo" loading="eager">
+          </div>
+          <h1>
+            <span class="title" id="money">该下班了吧</span>
+            <span class="byline" id="nowTime">@mirai03</span>
+          </h1>
+          <p class="header-desc">
+            只是一个 <span class="highlight-text">想下班</span> 的无情牛馬。
+            <p class="header-desc" id="nowTime"></p>
+          <div style="display: flex;">
+            <p class="info" id="todayStatus"></p>
+            <p class="header-desc"><span class="highlight-text" id="countdown" style="margin-left:1em;"></span></p></div>
+            <div>
+            <span class="header-desc" id="workdays"></span>            
+            <p class="header-desc" id="progress"></p></div>
+          </p>
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="companies">
+          <h2>Use For Work</h2>
+          <div class="card-grid">
+            <article class="card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1bgLcBItr-q58gZ97-Zs-592lRYeR1BBnIg&s" width="24" height="24" alt="Adobe logo" class="card-icon">
+              <h3><a href="https://glogin.rms.rakuten.co.jp/?sp_id=1&gl_redirect_url=https%3A%2F%2Fservice.rms.rakuten.co.jp%2Fterms" id="rakutenLink">Rakuten RMS</a></h3>
+              <p id="8709">回咨询、订单分组、打单、发货、回评价、发coupon</p>
+            </article>
+            <article class="card">
+              <img src="./RabbitPOINT_files/Amazon_icon.png" width="24" height="24" alt="Grammarly logo" class="card-icon">
+              <h3><a href="https://sellercentral.amazon.co.jp/hz/fba/profitabilitycalculator/index?lang=ja_JP">Amazon Seller Central</a></h3>
+              <p>打单、看库存、纳品、关注评价<br>打印标签纸用A5、纳品条码一次印40张</p>
+            </article>
+            <article class="card">
+              <img src="https://play-lh.googleusercontent.com/r3ej9chUEQ8p7pM0XN79WcTePSAjRaJaRvKYyyvjwGGQlFkZgwaNfuIVomWG8CNE80Q" width="24" height="24" alt="Your Company" class="card-icon">
+              <h3><a href="https://mercari-shops.com/seller/shops/Rwb9yTKiV4dpNAGZwJCYuf">Mercari Shop</a></h3>
+              <p>回咨询、打单、发货、回评价、更新页面</p>
+            </article>
+            <article class="card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0EbboGNf3GssNkiUrMCoqREU1pDuecTedsg&s" width="24" height="24" alt="Your Company" class="card-icon">
+              <h3><a href="https://bmypage.kuronekoyamato.co.jp/bmypage/" id="YamatoLink">Yamato Business Members</a></h3>
+              <p id="2022">送り状発行システムB2クラウド：かんたん発送、外部データから発行<br>印单：保存分の発行、履歴から発行<br>下载单号：発行済データの検索</p>
+            </article>            
+          </div>
+        </section>
+
+        <section class="services">
+          <h2>All Work Copies</h2>
+          <div class="card-grid">
+            <article class="card">
+              <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <path stroke="var(--text-secondary)" stroke-width="1.5" d="M5 6h14a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/>
+                <path stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 8l7 6 7-6"/>
+              </svg>
+              <h3><a href="https://amelicamelic.github.io/Time/RabbitPOINT.html/#" onclick="showEmailPopup(event)" >Login Email</a></h3>
+              <p>给自己看的：密码上短下长，自己的加上sd</p>
+            </article>
+            <article class="card">
+              <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <rect width="16" height="13.714" x="4" y="5" stroke="var(--text-secondary)" stroke-width="1.5" rx="1.5"></rect>
+                <circle cx="7" cy="8" r=".5" stroke="var(--text-secondary)"></circle>
+                <circle cx="10" cy="8" r=".5" stroke="var(--text-secondary)"></circle>
+              </svg>
+              <h3><a href="https://amelicamelic.github.io/Time/RabbitPOINT.html/#" onclick="showIDPopup(event)" data-popup-title="User ID">Shared Network Folder</a></h3>
+              <p>真的觉得我的电脑上需要放乖乖==</p>
+            </article>
+            <article class="card is-available">
+              <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <path stroke="var(--text-secondary)" stroke-width="1.5" d="M18 7H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12.5l3 3V8a1 1 0 0 0-1-1Z"/>
+                <path stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round" d="M7.13 11.3h10"/>
+                <path stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round" d="M7.13 14.5h10"/>
+              </svg>
+              <h3><a href="https://amelicamelic.github.io/Time/RabbitPOINT.html/#" onclick="CopyTextPopup(event)" data-popup-title="Copy in touch">Customer Center</a><span class="cursor">|</span></h3>
+              <p>如果某天奇葩的顾客都灭绝了，我相信地球人口剩下不到一半。<br>我首当其冲（比ya消失）</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-links">
+          <div class="social-links">
+            <a href="https://www.rakuten.co.jp/milifestyle/" target="_blank" aria-label="Follow me on X" class="social-link">Rakuten</a>
+            <a href="https://www.amazon.co.jp/b?node=26286483051&ie=UTF8&marketplaceID=A1VC38T7YXB528&me=A17C6K9OIW5465" target="_blank" aria-label="Connect with me on LinkedIn" class="social-link">Amazon</a>
+            <a href="https://jp.mercari.com/search?keyword=MiLifeStyle" target="_blank" aria-label="Check out my GitHub" class="social-link">Mercari</a>
+            <a href="https://amelicamelic.github.io/Time/RabbitPOINT.html/#" onclick="showEmailPopup(event)" data-popup-title="Get in touch" aria-label="Send me an email" class="social-link">Email</a>
+          </div>
+          <div class="website-link">
+            <img src="https://hp-asp-lab5.s3.ap-northeast-1.amazonaws.com/test-ver5-66018/favicon/favicon.ico?t=1698810991" width="24" height="24" alt="Mighty Alex Logo" class="website-logo">
+            <a href="https://mighty.tools/" aria-label="Check out my website" class="social-link">㊑RAITOMIRAI</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <div id="popup-wrapper"></div>
+
+    <script src="./RabbitPOINT_files/ui.js"></script>
+    <script src="./RabbitPOINT_files/money.js"></script>
+    <script src="./RabbitPOINT_files/lock.js"></script>    
+    <!-- Hotjar Tracking Code -->    
+    <script src="./RabbitPOINT_files/email.js"></script>
+    <script src="./RabbitPOINT_files/net.js"></script>
+    <script src="./RabbitPOINT_files/CC.js"></script>
+
