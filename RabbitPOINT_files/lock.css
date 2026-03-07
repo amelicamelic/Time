@@ -22,16 +22,14 @@
 #loginScreen{
     position: fixed;
     top:0; left:0;
-    width:100%; 
-    height: calc(100% + env(safe-area-inset-bottom)); /* 加上底部安全区 */
-    padding-top: env(safe-area-inset-top); /* 加上顶部刘海 */
-    padding-bottom: env(safe-area-inset-bottom);
+    width:200%; height:200%;
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction: column;
     z-index:9999;
     backdrop-filter: blur(11.5px); /* 模糊50% */
+    transform: translate(-25%, -25%);
 }
 #loginScreen input{
     padding:12px 14px;
@@ -158,4 +156,5 @@
     opacity: 0;
 
 }
+
 
