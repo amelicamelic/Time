@@ -25,6 +25,7 @@
     width:100%; 
     height: calc(100% + env(safe-area-inset-bottom)); /* 加上底部安全区 */
     padding-top: env(safe-area-inset-top); /* 加上顶部刘海 */
+    padding-bottom: env(safe-area-inset-bottom);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -157,3 +158,4 @@
     opacity: 0;
 
 }
+
