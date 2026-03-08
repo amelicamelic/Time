@@ -57,3 +57,21 @@ window.addEventListener("blur", lockScreen);
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) lockScreen();
 });
+
+// ===== 防止手机键盘把页面顶上去 =====
+let scrollY = 0;
+
+document.addEventListener("focusin", (e) => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+    scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+  }
+});
+
+document.addEventListener("focusout", () => {
+  document.body.style.position = "";
+  document.body.style.top = "";
+  window.scrollTo(0, scrollY);
+});
