@@ -161,5 +161,3 @@ body.locked{
     content: "\00a0"; /* 空格字符，保留行高但不顯示文字 */
     opacity: 0;
 }
-
-
