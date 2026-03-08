@@ -5,14 +5,12 @@ function isPasswordCorrect(input){
 } // 设置密码
 let idleTimer;
 let pinMode = false;
-const preventScroll = (e) => e.preventDefault();
 
 function checkPassword(){
     const input = document.getElementById("passwordInput").value;
     if(isPasswordCorrect(input)){
         document.getElementById("loginScreen").style.display = "none";
         document.body.classList.remove("locked"); 
-        document.removeEventListener("touchmove", preventScroll);
         resetIdleTimer();
     }else{
         document.getElementById("loginMsg").innerText = "𓂧𓏏 𓈖𓆑 𓅱𓂋";
@@ -30,7 +28,6 @@ function lockScreen(){
     document.getElementById("passwordInput").value = "";
     document.getElementById("loginMsg").innerText = "";
     document.body.classList.add("locked");
-    document.addEventListener("touchmove", preventScroll, { passive:false });
 }
 
 // 监听用户操作
@@ -57,32 +54,3 @@ window.addEventListener("blur", lockScreen);
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) lockScreen();
 });
-
-// ===== 防止手机键盘把页面顶上去 =====
-let scrollY = 0;
-
-document.addEventListener("focusin", (e) => {
-  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
-    scrollY = window.scrollY;
-
-    document.documentElement.style.position = "fixed";
-    document.body.style.position = "fixed";
-
-    document.documentElement.style.top = `-${scrollY}px`;
-    document.body.style.top = `-${scrollY}px`;
-
-    document.documentElement.style.width = "100%";
-    document.body.style.width = "100%";
-  }
-});
-
-document.addEventListener("focusout", () => {
-  document.documentElement.style.position = "";
-  document.body.style.position = "";
-
-  document.documentElement.style.top = "";
-  document.body.style.top = "";
-
-  window.scrollTo(0, scrollY);
-});
-
