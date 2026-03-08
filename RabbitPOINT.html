@@ -197,25 +197,23 @@
   <script src="./RabbitPOINT_files/CC.js"></script>
 
   <script>
-  document.addEventListener("DOMContentLoaded",()=>{
-    const logo=document.getElementById("logoImg"),
-          l=[...Array(10)].map((_,i)=>`./RabbitPOINT_files/logo/Light${i?i:''}.png`),
-          d=[...Array(5)].map((_,i)=>`./RabbitPOINT_files/logo/Dark${i?i:''}.png`),
-          sp="./RabbitPOINT_files/logo/SP.png";
-    let li=0,di=0;
-  
-    [...l,...d,sp].forEach(s=>new Image().src=s);
-  
-    const upd=()=>logo.src=document.documentElement.getAttribute("data-theme")==="dark"?d[di]:l[li];
-  
-    logo.onclick=()=>{
-      if(Math.random()<0.03){logo.src=sp;return;}
-      document.documentElement.getAttribute("data-theme")==="dark"?di=(di+1)%d.length:li=(li+1)%l.length;
-      upd();
-    };
-  
-    new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
-    upd();
+  document.addEventListener("DOMContentLoaded", () => {
+    const logo = document.getElementById("logoImg");
+    const light = [...Array(10)].map((_, i) => `./RabbitPOINT_files/logo/Light${i?i+'' : ''}.png`);
+    const dark = [...Array(5)].map((_,i)=>`./RabbitPOINT_files/logo/Dark${i||''}.png`);
+    const sp = "./RabbitPOINT_files/logo/SP.png";
+    let l=0,d=0;
+
+    const update = () => logo.src = document.documentElement.getAttribute("data-theme")==="dark"? dark[d] : light[l];
+
+    logo.addEventListener("click", () => {
+      if(Math.random()<0.03){logo.src=sp; return;}
+      document.documentElement.getAttribute("data-theme")==="dark"? d=(d+1)%dark.length : l=(l+1)%light.length;
+      update();
+    });
+
+    new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+    update();
   });
   </script>
 
