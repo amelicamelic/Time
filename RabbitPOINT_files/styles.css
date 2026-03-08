@@ -58,7 +58,7 @@ body {
   -webkit-font-smoothing: antialiased;
   background: var(--bg-main);
   letter-spacing: -0.011em;
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 a {
@@ -153,6 +153,7 @@ a:hover {
 .founder-message,
 .footer {
   border-top: 1px solid var(--border-color);
+  transition: all 0.3s ease-in-out;  
 }
 
 .projects h2,
@@ -178,6 +179,7 @@ a:hover {
   transition: background-color var(--transition-fast);
   will-change: background-color;
   background-color: transparent;
+  transition: all 0.3s ease-in-out;  
 }
 
 .card:hover {
