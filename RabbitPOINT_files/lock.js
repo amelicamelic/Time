@@ -5,14 +5,12 @@ function isPasswordCorrect(input){
 } // 设置密码
 let idleTimer;
 let pinMode = false;
-const preventScroll = (e) => e.preventDefault();
 
 function checkPassword(){
     const input = document.getElementById("passwordInput").value;
     if(isPasswordCorrect(input)){
         document.getElementById("loginScreen").style.display = "none";
         document.body.classList.remove("locked"); 
-        document.removeEventListener("touchmove", preventScroll);
         resetIdleTimer();
     }else{
         document.getElementById("loginMsg").innerText = "𓂧𓏏 𓈖𓆑 𓅱𓂋";
@@ -30,7 +28,6 @@ function lockScreen(){
     document.getElementById("passwordInput").value = "";
     document.getElementById("loginMsg").innerText = "";
     document.body.classList.add("locked");
-    document.addEventListener("touchmove", preventScroll, { passive:false });
 }
 
 // 监听用户操作
@@ -57,4 +54,3 @@ window.addEventListener("blur", lockScreen);
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) lockScreen();
 });
-
