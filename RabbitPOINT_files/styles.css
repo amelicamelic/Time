@@ -443,6 +443,10 @@ img {
   background: var(--bg-main);
 }
 
+.transition{
+  transition: all 0.3s ease-in-out;
+}
+
 @keyframes fadeBackground {
   from {
     background-color: transparent;
