@@ -168,12 +168,36 @@
     </div>
 
     <div id="popup-wrapper"></div>
+  </body>
+  
+  <script src="./RabbitPOINT_files/ui.js"></script>
+  <script src="./RabbitPOINT_files/money.js"></script>
+  <script src="./RabbitPOINT_files/lock.js"></script>    
+  <!-- Hotjar Tracking Code -->    
+  <script src="./RabbitPOINT_files/email.js"></script>
+  <script src="./RabbitPOINT_files/net.js"></script>
+  <script src="./RabbitPOINT_files/CC.js"></script>
 
-    <script src="./RabbitPOINT_files/ui.js"></script>
-    <script src="./RabbitPOINT_files/money.js"></script>
-    <script src="./RabbitPOINT_files/lock.js"></script>    
-    <!-- Hotjar Tracking Code -->    
-    <script src="./RabbitPOINT_files/email.js"></script>
-    <script src="./RabbitPOINT_files/net.js"></script>
-    <script src="./RabbitPOINT_files/CC.js"></script>
+/* logo icon */
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const logo = document.getElementById("logoImg");
+    const light = [...Array(10)].map((_, i) => `./RabbitPOINT_files/logo/Light${i?i+'' : ''}.png`);
+    const dark = [...Array(5)].map((_,i)=>`./RabbitPOINT_files/logo/Dark${i||''}.png`);
+    const sp = "./RabbitPOINT_files/logo/SP.png";
+    let l=0,d=0;
 
+    const update = () => logo.src = document.documentElement.getAttribute("data-theme")==="dark"? dark[d] : light[l];
+
+    logo.addEventListener("click", () => {
+      if(Math.random()<0.03){logo.src=sp; return;}
+      document.documentElement.getAttribute("data-theme")==="dark"? d=(d+1)%dark.length : l=(l+1)%light.length;
+      update();
+    });
+
+    new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+    update();
+  });
+  </script>
+
+</html>
