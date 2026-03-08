@@ -59,7 +59,9 @@
     <!-- 登录遮罩 -->
     <div id="loginScreen"> 
         <h2>𓋴𓏏𓎛 𓇋𓈖𓊪𓅱</h2>
-        <input type="password" id="passwordInput" autocomplete="off" placeholder="𓃩𓃢" onkeydown="if(event.key==='Enter'){checkPassword()}">
+        <form autocomplete="off" onsubmit="return false;">
+          <input type="password" id="passwordInput" placeholder="𓃩𓃢" autocomplete="new-password" onkeydown="if(event.key==='Enter'){checkPassword()}">
+        </form>
         <button onclick="checkPassword()"></button>
         <div id="loginMsg"></div>
     </div>
