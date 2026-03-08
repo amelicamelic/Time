@@ -64,14 +64,25 @@ let scrollY = 0;
 document.addEventListener("focusin", (e) => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
     scrollY = window.scrollY;
+
+    document.documentElement.style.position = "fixed";
     document.body.style.position = "fixed";
+
+    document.documentElement.style.top = `-${scrollY}px`;
     document.body.style.top = `-${scrollY}px`;
+
+    document.documentElement.style.width = "100%";
     document.body.style.width = "100%";
   }
 });
 
 document.addEventListener("focusout", () => {
+  document.documentElement.style.position = "";
   document.body.style.position = "";
+
+  document.documentElement.style.top = "";
   document.body.style.top = "";
+
   window.scrollTo(0, scrollY);
 });
+
