@@ -10,6 +10,7 @@ function checkPassword(){
     const input = document.getElementById("passwordInput").value;
     if(isPasswordCorrect(input)){
         document.getElementById("loginScreen").style.display = "none";
+        document.body.classList.remove("locked"); 
         resetIdleTimer();
     }else{
         document.getElementById("loginMsg").innerText = "𓂧𓏏 𓈖𓆑 𓅱𓂋";
@@ -26,6 +27,7 @@ function lockScreen(){
     document.getElementById("loginScreen").style.display = "flex";
     document.getElementById("passwordInput").value = "";
     document.getElementById("loginMsg").innerText = "";
+    document.body.classList.add("locked");
 }
 
 // 监听用户操作
