@@ -139,11 +139,13 @@
 
 .working{
     font-weight:bold;
-    color:#8b0000;
+      font-size: 13px;
+    color: var(--clock);
 }
 
 .resting{
     font-weight:bold;
+      font-size: 13px;
     color:#69E147;
 }
 
@@ -153,8 +155,8 @@
 #countdown:empty::after {
     content: "\00a0"; /* 空格字符，保留行高但不顯示文字 */
     opacity: 0;
-
 }
+
 
 
 
