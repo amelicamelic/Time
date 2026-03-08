@@ -206,16 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const sp    = "./RabbitPOINT_files/logo/SP.png";
   let l=0, d=0;
 
-  // 预加载所有图片
   [...light, ...dark, sp].forEach(src => { const img=new Image(); img.src=src; });
 
-  // 更新 logo
   const update = () => {
     const theme = document.documentElement.getAttribute("data-theme");
     logo.src = theme === "dark" ? dark[d] : light[l];
   };
 
-  // 点击轮换
   logo.addEventListener("click", () => {
     if(Math.random()<0.03){ logo.src=sp; return; }
     const theme = document.documentElement.getAttribute("data-theme");
@@ -224,12 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   });
 
-  // 监听主题切换，立即更新
   new MutationObserver(update).observe(document.documentElement,{
     attributes:true, attributeFilter:["data-theme"]
   });
 
-  // 页面初始更新
   update();
 });
 </script>
