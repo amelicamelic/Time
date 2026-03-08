@@ -84,7 +84,10 @@
     margin-top:10px; 
 }
 
-
+/* 锁定滚动 */
+body.locked{
+    overflow: hidden;
+}
 
 /* 按钮 */
 #manualLock{
@@ -158,4 +161,5 @@
     content: "\00a0"; /* 空格字符，保留行高但不顯示文字 */
     opacity: 0;
 }
+
 
