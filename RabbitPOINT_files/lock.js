@@ -50,7 +50,10 @@ function togglePin(){
 
 // 页面加载时锁屏
 lockScreen();
-window.addEventListener("blur", lockScreen);
-document.addEventListener("visibilitychange", () => {
-    if (document.hidden) lockScreen();
+window.addEventListener("blur", () => {
+    if(!pinMode) lockScreen();
 });
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !pinMode) lockScreen();
+});
+
