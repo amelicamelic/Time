@@ -133,3 +133,25 @@ function update(){
 
 setInterval(update,1000);
 update();
+
+// ------------------- 请假了 -------------------
+
+let leaveMinutes = 0;
+
+function setLeave(d = 0, h = 0, m = 0){
+    leaveMinutes = d * 8 * 60 + h * 60 + m;
+}
+
+setLeave(1, 0, 0); // 默认没请假，要改就改这里
+
+function getLeaveMs(){
+    return leaveMinutes * 60000;
+}
+
+const _oldCalc = calculateEarned;
+
+calculateEarned = function(){
+    let { workedMs, totalMs } = calculateWorkTimeProgress();
+    workedMs = Math.max(0, workedMs - getLeaveMs());
+    return monthlySalary * (workedMs / totalMs);
+}
