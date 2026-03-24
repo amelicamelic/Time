@@ -142,7 +142,7 @@ function setLeave(d = 0, h = 0, m = 0){
     leaveMinutes = d * 8 * 60 + h * 60 + m;
 }
 
-setLeave(1, 0, 0); // 默认没请假，要改就改这里
+setLeave(1, 2, 0); // 默认没请假，要改就改这里
 
 function getLeaveMs(){
     return leaveMinutes * 60000;
