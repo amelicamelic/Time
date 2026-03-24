@@ -142,16 +142,23 @@ function setLeave(d = 0, h = 0, m = 0){
     leaveMinutes = d * 8 * 60 + h * 60 + m;
 }
 
-setLeave(1, 2, 0); // 默认没请假，要改就改这里
+setLeave(1, 2, 0); // 改这里
 
-function getLeaveMs(){
-    return leaveMinutes * 60000;
+function getLeaveDeduction(){
+    const dailyRate = monthlySalary / 22;      // 日薪
+    const hourlyRate = monthlySalary / 173.5;  // 时薪
+
+    // 用时薪扣（公司规则）
+    return (leaveMinutes / 60) * hourlyRate;
 }
 
 const _oldCalc = calculateEarned;
 
 calculateEarned = function(){
     let { workedMs, totalMs } = calculateWorkTimeProgress();
-    workedMs = Math.max(0, workedMs - getLeaveMs());
-    return monthlySalary * (workedMs / totalMs);
+    let earned = monthlySalary * (workedMs / totalMs);
+
+    earned -= getLeaveDeduction();
+
+    return Math.max(0, earned);
 }
