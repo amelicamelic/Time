@@ -142,7 +142,7 @@ function setLeave(d = 0, h = 0, m = 0){
     leaveMinutes = d * 8 * 60 + h * 60 + m;
 }
 
-setLeave(1, 2, 0); // 改这里
+setLeave(0, 0, 0); // 改这里
 
 function getLeaveDeduction(){
     const dailyRate = monthlySalary / 22;      // 日薪
